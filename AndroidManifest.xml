@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="io.github.taitungsun.dictbridge"
-    android:versionCode="2" android:versionName="1.1">
+    android:versionCode="3" android:versionName="1.2">
     <uses-sdk android:minSdkVersion="29" android:targetSdkVersion="30" />
     <queries><package android:name="com.onyx.dict" /></queries>
     <application android:label="Dictionary" android:allowBackup="false">
@@ -22,6 +22,15 @@
                 <action android:name="android.intent.action.SEND" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:mimeType="text/plain" />
+            </intent-filter>
+        </activity>
+        <!-- Launcher icon: without one, Boox never lists the app in its auto-freeze
+             settings and re-freezes it on every boot. -->
+        <activity android:name=".StatusActivity" android:label="Dict Bridge"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>
