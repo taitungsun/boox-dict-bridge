@@ -8,7 +8,11 @@ Tested on a Boox Go 7 (Android 11) with Economist 4.108.0.
 
 ## Install
 
-Download the APK from Releases and install it. On a Boox, check that the app isn't frozen. The Boox freeze feature disabled it right after install on my device, and while frozen it does nothing. To unfreeze it over adb:
+Download the APK from Releases and install it.
+
+Boox freezes new apps, and a frozen app does nothing. It also freezes them again at every reboot. To stop that, open the Apps tab, tap the snowflake icon at the top, and switch off freezing for "Dictionary". Note that this list uses the name "Dictionary", not the "Dict Bridge" name shown under the app's icon.
+
+You can also unfreeze it over adb, but Boox will freeze it again at the next reboot:
 
     adb shell pm enable io.github.taitungsun.dictbridge
 
@@ -17,6 +21,8 @@ Download the APK from Releases and install it. On a Boox, check that the app isn
 Long-press a word in an Economist article, then tap Translate. Define under the ⋮ menu also works.
 
 The app also appears as "Dictionary" in the share menu. This is needed because the Economist app can only reach apps that accept shared text.
+
+The "Dict Bridge" icon opens a short status screen. The icon is there so the app shows up in the Boox freeze settings.
 
 ## Build
 
