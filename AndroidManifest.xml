@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="io.github.taitungsun.dictbridge"
+    android:versionCode="2" android:versionName="1.1">
+    <uses-sdk android:minSdkVersion="29" android:targetSdkVersion="30" />
+    <queries><package android:name="com.onyx.dict" /></queries>
+    <application android:label="Dictionary" android:allowBackup="false">
+        <!-- Economist's "Define" (overflow) and "Translate" (main bar) buttons send
+             ACTION_DEFINE / ACTION_TRANSLATE + EXTRA_TEXT; both open the dictionary. -->
+        <activity android:name=".BridgeActivity" android:exported="true"
+            android:theme="@android:style/Theme.NoDisplay" android:excludeFromRecents="true"
+            android:noHistory="true" android:taskAffinity="">
+            <intent-filter>
+                <action android:name="android.intent.action.DEFINE" />
+                <action android:name="android.intent.action.TRANSLATE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <!-- Economist targets SDK 30+ and only "sees" apps matching its <queries>;
+                 it queries SEND text/plain, so this filter makes us visible to it.
+                 Also gives a "Dictionary" share target. -->
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>
