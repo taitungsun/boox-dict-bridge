@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="io.github.taitungsun.dictbridge"
-    android:versionCode="3" android:versionName="1.2">
+    android:versionCode="5" android:versionName="1.3">
     <uses-sdk android:minSdkVersion="29" android:targetSdkVersion="30" />
     <queries><package android:name="com.onyx.dict" /></queries>
     <application android:label="Dictionary" android:allowBackup="false">
         <!-- Economist's "Define" (overflow) and "Translate" (main bar) buttons send
-             ACTION_DEFINE / ACTION_TRANSLATE + EXTRA_TEXT; both open the dictionary. -->
+             ACTION_DEFINE / ACTION_TRANSLATE + EXTRA_TEXT. Define opens the dictionary
+             popup; Translate opens the full dictionary app. -->
         <activity android:name=".BridgeActivity" android:exported="true"
             android:theme="@android:style/Theme.NoDisplay" android:excludeFromRecents="true"
             android:noHistory="true" android:taskAffinity="">

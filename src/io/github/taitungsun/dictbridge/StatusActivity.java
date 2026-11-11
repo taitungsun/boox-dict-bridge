@@ -12,7 +12,7 @@ public class StatusActivity extends Activity {
         TextView tv = new TextView(this);
         tv.setText("Dictionary bridge is active.\n\n"
                 + "To keep it working after a reboot, turn off auto-freeze for "
-                + "\"Dict Bridge\" in the Boox app settings.");
+                + "\"Dictionary\" in Apps > Freeze Settings.");
         tv.setTextSize(20);
         tv.setPadding(48, 48, 48, 48);
         setContentView(tv);
