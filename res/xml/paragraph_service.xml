@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Reads the Economist paragraph that holds the selected text, so Translate can show the whole paragraph. -->
+<accessibility-service xmlns:android="http://schemas.android.com/apk/res/android"
+    android:accessibilityEventTypes="typeViewTextSelectionChanged|typeViewLongClicked|typeViewScrolled|typeWindowContentChanged|typeWindowStateChanged"
+    android:accessibilityFeedbackType="feedbackGeneric"
+    android:accessibilityFlags="flagReportViewIds|flagRetrieveInteractiveWindows"
+    android:canRetrieveWindowContent="true"
+    android:notificationTimeout="500"
+    android:packageNames="com.economist.lamarr"
+    android:description="@string/a11y_desc" />
