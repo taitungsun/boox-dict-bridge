@@ -29,8 +29,9 @@ public class TranslateEntry extends Activity {
             return;
         }
         boolean turnedOn = ensure(this);
-        Log.i("DictBridge", "service was off; re-enabled=" + turnedOn);
-        if (!turnedOn) { forward(); return; }
+        Log.i("DictBridge", "service not connected; re-enabled=" + turnedOn);
+        // Enabled but not bound yet (e.g. right after an update): wait for it as well
+        if (!turnedOn && !enabled(this)) { forward(); return; }
         Handler h = new Handler(Looper.getMainLooper());
         long until = System.currentTimeMillis() + WAIT_MS;
         h.post(new Runnable() {

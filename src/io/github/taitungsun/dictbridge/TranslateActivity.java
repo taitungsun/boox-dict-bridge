@@ -61,9 +61,13 @@ public class TranslateActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         scale = getSharedPreferences(PREFS, MODE_PRIVATE).getFloat("scale", 1f);
-        // Book-style Chinese serif, pushed once to the app folder (the Page has no Ming/Song font)
-        File f = new File(getExternalFilesDir(null), "NotoSerifTC-Regular.otf");
+        // Book-style Chinese serif (Boox has no Ming/Song font): downloaded once, sans until then
+        File f = FontFetcher.file(this);
         try { if (f.isFile()) zhFace = Typeface.createFromFile(f); } catch (RuntimeException ignored) { }
+        FontFetcher.ensure(this, () -> runOnUiThread(() -> {
+            try { zhFace = Typeface.createFromFile(FontFetcher.file(this)); } catch (RuntimeException e) { return; }
+            for (int i = 0; i < zhViews.size(); i++) if (zhText.get(i) != null) setZh(i, zhText.get(i));
+        }));
         LinearLayout page = new LinearLayout(this);
         page.setOrientation(LinearLayout.VERTICAL);
         page.setBackgroundColor(Color.WHITE);
