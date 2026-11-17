@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Reads the text on screen of the app you are reading in, only at the moment Translate is
- * tapped (TranslateEntry calls refresh()). TranslateActivity then widens the selected words to
+ * Reads the text on screen of the Economist app, only at the moment Translate is tapped
+ * (TranslateEntry calls refresh()). TranslateActivity then widens the selected words to
  * the whole paragraph(s) they belong to. It does not watch the screen otherwise.
  */
 public class ParagraphService extends AccessibilityService {
@@ -24,6 +24,7 @@ public class ParagraphService extends AccessibilityService {
     private static volatile List<Block> visible = new ArrayList<>();
     private static volatile long stamp;
     private static volatile ParagraphService instance;
+    private static final String ECONOMIST = "com.economist.lamarr";
 
     @Override
     protected void onServiceConnected() { instance = this; }
@@ -40,8 +41,8 @@ public class ParagraphService extends AccessibilityService {
     static boolean connected() { return instance != null; }
 
     /**
-     * Snapshot the app window right under our invisible TranslateEntry window: the topmost
-     * application window that is not ours.
+     * Snapshot the Economist window under our invisible TranslateEntry window. Text in any
+     * other app is never read.
      */
     static void refresh() {
         ParagraphService s = instance;
@@ -51,7 +52,7 @@ public class ParagraphService extends AccessibilityService {
                 if (w.getType() != AccessibilityWindowInfo.TYPE_APPLICATION) continue;
                 AccessibilityNodeInfo r = w.getRoot();
                 if (r == null || r.getPackageName() == null
-                        || s.getPackageName().contentEquals(r.getPackageName())) continue;
+                        || !ECONOMIST.contentEquals(r.getPackageName())) continue;
                 List<Block> out = new ArrayList<>();
                 collect(r, out);
                 visible = out;
