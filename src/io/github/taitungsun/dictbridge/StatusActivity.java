@@ -45,16 +45,19 @@ public class StatusActivity extends Activity {
         page.setOrientation(LinearLayout.VERTICAL);
         page.setPadding(dp(32), dp(36), dp(32), dp(40));
 
-        // 譯之橋 large, "Dict Bridge" small beside it on the same baseline
-        android.text.SpannableStringBuilder t = new android.text.SpannableStringBuilder("譯之橋  Dict Bridge");
-        t.setSpan(new android.text.style.RelativeSizeSpan(0.55f), 3, t.length(),
-                android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        t.setSpan(new android.text.style.ForegroundColorSpan(GRAY), 3, t.length(),
-                android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        TextView title = text("", 32, Color.BLACK);
-        title.setText(t);
+        // 譯之橋 large; "DICT BRIDGE" small, in spaced capitals, on the same baseline
+        LinearLayout head = new LinearLayout(this);
+        head.setOrientation(LinearLayout.HORIZONTAL);
+        head.setBaselineAligned(true);
+        TextView title = text("譯之橋", 32, Color.BLACK);
         title.setTypeface(Typeface.DEFAULT_BOLD);
-        page.addView(title);
+        head.addView(title);
+        TextView en = text("DICT BRIDGE", 15, GRAY);
+        en.setTypeface(Typeface.DEFAULT_BOLD);
+        en.setLetterSpacing(0.18f);
+        en.setPadding(dp(14), 0, 0, 0);
+        head.addView(en);
+        page.addView(head);
         TextView sub = text("經濟學人單字解析與段落翻譯補完計畫", 16, GRAY);
         sub.setPadding(0, dp(4), 0, dp(24));
         page.addView(sub);
