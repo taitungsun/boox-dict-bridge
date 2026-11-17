@@ -45,8 +45,8 @@ public class StatusActivity extends Activity {
         page.setOrientation(LinearLayout.VERTICAL);
         page.setPadding(dp(32), dp(36), dp(32), dp(40));
 
-        // 字典橋 large, "Dict Bridge" small beside it on the same baseline
-        android.text.SpannableStringBuilder t = new android.text.SpannableStringBuilder("字典橋  Dict Bridge");
+        // 譯之橋 large, "Dict Bridge" small beside it on the same baseline
+        android.text.SpannableStringBuilder t = new android.text.SpannableStringBuilder("譯之橋  Dict Bridge");
         t.setSpan(new android.text.style.RelativeSizeSpan(0.55f), 3, t.length(),
                 android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         t.setSpan(new android.text.style.ForegroundColorSpan(GRAY), 3, t.length(),
