@@ -8,7 +8,7 @@ Translate is tested on a Boox Page (Android 11). v1.3 (Define and the dictionary
 
 ## Install
 
-Download `dict-bridge-v1.4.apk` from Releases and install it.
+Download `dict-bridge-v1.4.1.apk` from Releases and install it.
 
 Boox freezes new apps, and a frozen app does nothing. It also freezes them again at every reboot. To stop that, open the Apps tab, tap the snowflake icon at the top, and switch off freezing for "Dictionary". Note that this list uses the name "Dictionary", not the "Dict Bridge" name shown under the app's icon.
 
