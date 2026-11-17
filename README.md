@@ -8,7 +8,7 @@ Translate is tested on a Boox Page (Android 11). v1.3 (Define and the dictionary
 
 ## Install
 
-Build the APK (see Build) and install it. The APK in Releases is v1.3, which has Define and a dictionary-only Translate.
+Download `dict-bridge-v1.4.apk` from Releases and install it.
 
 Boox freezes new apps, and a frozen app does nothing. It also freezes them again at every reboot. To stop that, open the Apps tab, tap the snowflake icon at the top, and switch off freezing for "Dictionary". Note that this list uses the name "Dictionary", not the "Dict Bridge" name shown under the app's icon.
 
@@ -19,14 +19,12 @@ You can also unfreeze it over adb, but Boox will freeze it again at the next reb
 ### Translate setup
 
 1. Open "Dict Bridge" (its settings screen is in Chinese), paste your Gemini API key into the key field and tap the button below it to save.
-2. Turn on "Dict Bridge paragraphs" in Settings > Accessibility. It only reads text in the Economist app, so Translate can show the whole paragraph instead of just the selected words.
+2. Turn on "Dict Bridge paragraphs" in Settings > Accessibility. It reads text only in the Economist app and only at the moment you tap Translate, so Translate can show the whole paragraph instead of just the selected words.
 3. Optional, over adb. The Boox NaviBall switch turns other accessibility services off. With this permission, the app switches its service back on by itself:
 
        adb shell pm grant io.github.taitungsun.dictbridge android.permission.WRITE_SECURE_SETTINGS
 
-4. Optional, for a book-style Chinese font. Download `NotoSerifTC-Regular.otf` from the Noto CJK project and copy it to the app's folder:
-
-       adb push NotoSerifTC-Regular.otf /sdcard/Android/data/io.github.taitungsun.dictbridge/files/
+The first time Translate runs, the app downloads a book-style Chinese font (Noto Serif TC, about 8 MB) from the Noto CJK project on GitHub. Until it arrives, the translation shows in the normal system font.
 
 ## Use
 
@@ -36,7 +34,7 @@ Define under the ⋮ menu shows the small dictionary popup.
 
 The app also appears as "Dictionary" in the share menu. This is needed because the Economist app can only reach apps that accept shared text.
 
-Translate sends the paragraph, together with the translation instructions and the date, to the Gemini API with your key. The app sends nothing anywhere else.
+Translate sends the paragraph, together with the translation instructions and the date, to the Gemini API with your key. Apart from that and the one-time font download, the app sends nothing and downloads nothing.
 
 ## Build
 
