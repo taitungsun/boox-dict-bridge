@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="a11y_desc">Lets Translate show the whole paragraph around the words you select in The Economist. It only reads text in The Economist app and sends nothing anywhere by itself.</string>
+    <string name="a11y_desc">Lets Translate show the whole paragraph around the words you select. It reads the text on screen only at the moment you tap Translate, and sends nothing anywhere by itself.</string>
 </resources>

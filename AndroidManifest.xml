@@ -32,11 +32,18 @@
         <!-- Invisible first stop for Translate: keeps the article window readable by the
              accessibility service, then opens TranslateActivity. -->
         <activity android:name=".TranslateEntry" android:exported="true"
+            android:label="整段翻譯"
             android:excludeFromRecents="true" android:noHistory="true"
             android:theme="@android:style/Theme.Translucent.NoTitleBar">
             <intent-filter>
                 <action android:name="android.intent.action.TRANSLATE" />
                 <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <!-- Other apps: an item in the system text-selection menu -->
+            <intent-filter>
+                <action android:name="android.intent.action.PROCESS_TEXT" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/plain" />
             </intent-filter>
         </activity>
         <activity android:name=".TranslateActivity" android:exported="false"
