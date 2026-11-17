@@ -45,10 +45,17 @@ public class StatusActivity extends Activity {
         page.setOrientation(LinearLayout.VERTICAL);
         page.setPadding(dp(32), dp(36), dp(32), dp(40));
 
-        TextView title = text("Dict Bridge", 30, Color.BLACK);
-        title.setTypeface(Typeface.SERIF);
+        // 字典橋 large, "Dict Bridge" small beside it on the same baseline
+        android.text.SpannableStringBuilder t = new android.text.SpannableStringBuilder("字典橋  Dict Bridge");
+        t.setSpan(new android.text.style.RelativeSizeSpan(0.55f), 3, t.length(),
+                android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        t.setSpan(new android.text.style.ForegroundColorSpan(GRAY), 3, t.length(),
+                android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        TextView title = text("", 32, Color.BLACK);
+        title.setText(t);
+        title.setTypeface(Typeface.DEFAULT_BOLD);
         page.addView(title);
-        TextView sub = text("Economist 字典與整段翻譯", 16, GRAY);
+        TextView sub = text("經濟學人單字解析與段落翻譯補完計畫", 16, GRAY);
         sub.setPadding(0, dp(4), 0, dp(24));
         page.addView(sub);
 
