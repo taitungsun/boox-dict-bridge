@@ -85,10 +85,12 @@ public class TranslateActivity extends Activity {
         enScroll = new ScrollView(this);
         en = column();
         enScroll.addView(en);
+        page.addView(label2("原文", dp(18)));
         page.addView(enScroll, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT));
 
         page.addView(divider());
+        page.addView(label2("中文翻譯", 0));
         zhScroll = new ScrollView(this);
         list = column();
         zhScroll.addView(list);
@@ -294,16 +296,24 @@ public class TranslateActivity extends Activity {
         v.setBackgroundColor(GRAY);
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(dp(64), dp(1));
         lp.gravity = Gravity.CENTER_HORIZONTAL;
-        lp.topMargin = dp(14);
-        lp.bottomMargin = dp(22);
+        lp.topMargin = dp(10);
+        lp.bottomMargin = dp(4);
         v.setLayoutParams(lp);
         return v;
+    }
+
+    /** Small gray pane label, aligned with the text column. */
+    private TextView label2(String name, int top) {
+        TextView t = label(name, 13, GRAY);
+        t.setLetterSpacing(0.2f);
+        t.setPadding(dp(40), top, dp(40), 0);
+        return t;
     }
 
     private LinearLayout column() {
         LinearLayout l = new LinearLayout(this);
         l.setOrientation(LinearLayout.VERTICAL);
-        l.setPadding(dp(40), dp(12), dp(40), dp(24));
+        l.setPadding(dp(40), dp(8), dp(40), dp(24));
         return l;
     }
 
