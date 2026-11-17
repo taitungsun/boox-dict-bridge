@@ -18,7 +18,7 @@ You can also unfreeze it over adb, but Boox will freeze it again at the next reb
 
 ### Translate setup
 
-1. Open "Dict Bridge", paste your Gemini API key and tap Save.
+1. Open "Dict Bridge" (its settings screen is in Chinese), paste your Gemini API key into the key field and tap the button below it to save.
 2. Turn on "Dict Bridge paragraphs" in Settings > Accessibility. It only reads text in the Economist app, so Translate can show the whole paragraph instead of just the selected words.
 3. Optional, over adb. The Boox NaviBall switch turns other accessibility services off. With this permission, the app switches its service back on by itself:
 
