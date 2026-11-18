@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="io.github.taitungsun.dictbridge"
-    android:versionCode="9" android:versionName="1.4.3">
+    android:versionCode="10" android:versionName="1.4.4">
     <uses-sdk android:minSdkVersion="29" android:targetSdkVersion="30" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
@@ -9,7 +9,7 @@
          after the Boox NaviBall toggle drops it from the list. -->
     <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS" />
     <queries><package android:name="com.onyx.dict" /></queries>
-    <application android:label="Dictionary" android:icon="@drawable/ic_launcher" android:allowBackup="false">
+    <application android:label="Dict Bridge" android:icon="@drawable/ic_launcher" android:allowBackup="false">
         <!-- Economist's "Define" (overflow) and "Translate" (main bar) buttons send
              ACTION_DEFINE / ACTION_TRANSLATE + EXTRA_TEXT. Define opens the dictionary
              popup; Translate shows a Gemini translation (TranslateActivity). -->
@@ -22,7 +22,7 @@
             </intent-filter>
             <!-- Economist targets SDK 30+ and only "sees" apps matching its <queries>;
                  it queries SEND text/plain, so this filter makes us visible to it.
-                 Also gives a "Dictionary" share target. -->
+                 Also gives a "Dict Bridge" share target. -->
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
                 <category android:name="android.intent.category.DEFAULT" />

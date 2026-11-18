@@ -8,9 +8,9 @@ Tested on a Boox Page (Android 11), Go 7 (Android 13), Go 10.3 (Android 12) and 
 
 ## Install
 
-Download `dict-bridge-v1.4.3.apk` from Releases and install it.
+Download `dict-bridge-v1.4.4.apk` from Releases and install it.
 
-Boox freezes new apps, and a frozen app does nothing. It also freezes them again at every reboot. To stop that, open the Apps tab, tap the snowflake icon at the top, and switch off freezing for "Dictionary". Note that this list uses the name "Dictionary", not the "Dict Bridge" name shown under the app's icon.
+Boox freezes new apps, and a frozen app does nothing. It also freezes them again at every reboot. To stop that, open the Apps tab, tap the snowflake icon at the top, and switch off freezing for "Dict Bridge".
 
 You can also unfreeze it over adb, but Boox will freeze it again at the next reboot:
 
@@ -34,7 +34,7 @@ If the paragraph service has just been switched back on, the first Translate sho
 
 Define under the ⋮ menu shows the small dictionary popup.
 
-The app also appears as "Dictionary" in the share menu. This is needed because the Economist app can only reach apps that accept shared text.
+The app also appears as "Dict Bridge" in the share menu. This is needed because the Economist app can only reach apps that accept shared text.
 
 Translate sends the paragraph, together with the translation instructions and the date, to the Gemini API with your key. Apart from that and the one-time font download, the app sends nothing and downloads nothing.
 

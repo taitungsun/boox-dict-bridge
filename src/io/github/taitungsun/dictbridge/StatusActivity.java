@@ -95,7 +95,7 @@ public class StatusActivity extends Activity {
         // Keep it running
         LinearLayout f = card("重開機後保持運作");
         f.addView(hint("Boox 會凍結新安裝的 app。請到「應用」分頁，點上方的雪花圖示，"
-                + "關閉「Dictionary」的凍結。清單裡顯示的名稱是「Dictionary」，不是「Dict Bridge」。"));
+                + "關閉「Dict Bridge」的凍結。"));
 
         ScrollView s = new ScrollView(this);
         s.setBackgroundColor(Color.WHITE);
