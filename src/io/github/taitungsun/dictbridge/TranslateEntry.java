@@ -24,9 +24,25 @@ public class TranslateEntry extends Activity {
                 | WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
         if (ParagraphService.connected()) {
             if (!getIntent().getBooleanExtra(AGAIN, false)) {
-                // Running already: read now; if Economist isn't behind us, nothing to wait for
-                ParagraphService.refresh();
-                forward();
+                // Running already: usually reads at once. The first read after the service
+                // started can come back empty (seen on the Nova3): retry for a second, then
+                // step aside like a fresh start. Text from any other app goes straight through.
+                android.net.Uri ref = getReferrer();
+                boolean economist = ref != null && "com.economist.lamarr".equals(ref.getHost());
+                if (!economist) { ParagraphService.refresh(); forward(); return; }
+                long soon = System.currentTimeMillis() + 1000;
+                new Thread(() -> {
+                    boolean ok;
+                    while (!(ok = ParagraphService.refresh()) && System.currentTimeMillis() < soon) nap();
+                    boolean read = ok;
+                    runOnUiThread(() -> {
+                        if (!read) {
+                            Log.i("DictBridge", "article not readable yet; stepping aside");
+                            getIntent().putExtra(REREAD, true);
+                        }
+                        forward();
+                    });
+                }).start();
                 return;
             }
             // Second pass after a fresh start: the window list may need a moment
