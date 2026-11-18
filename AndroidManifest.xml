@@ -61,7 +61,7 @@
              settings and re-freezes it on every boot. -->
         <activity android:name=".StatusActivity" android:label="Dict Bridge"
             android:exported="true"
-            android:theme="@android:style/Theme.DeviceDefault.Light.NoActionBar">
+            android:theme="@style/Settings">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
