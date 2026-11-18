@@ -9,7 +9,7 @@
          after the Boox NaviBall toggle drops it from the list. -->
     <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS" />
     <queries><package android:name="com.onyx.dict" /></queries>
-    <application android:label="Dictionary" android:icon="@mipmap/ic_launcher" android:allowBackup="false">
+    <application android:label="Dictionary" android:icon="@drawable/ic_launcher" android:allowBackup="false">
         <!-- Economist's "Define" (overflow) and "Translate" (main bar) buttons send
              ACTION_DEFINE / ACTION_TRANSLATE + EXTRA_TEXT. Define opens the dictionary
              popup; Translate shows a Gemini translation (TranslateActivity). -->
