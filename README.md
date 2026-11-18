@@ -1,6 +1,6 @@
 # boox-dict-bridge
 
-A small Android app for The Economist app on Boox e-readers. Define opens the Boox dictionary popup, and Translate shows a Gemini translation of the whole paragraph into Taiwan Traditional Chinese.
+Define words with the Boox dictionary and translate paragraphs with Gemini into Traditional Chinese (Taiwan), in The Economist app on Boox e-readers.
 
 Since version 4.108.0, the Economist app shows its own text-selection menu. Its Translate and Define buttons send `ACTION_TRANSLATE` and `ACTION_DEFINE`. Nothing on a Boox handles those, so tapping them crashed the app. This app handles both.
 
