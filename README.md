@@ -4,7 +4,7 @@ Define words with the Boox dictionary and translate paragraphs with Gemini into 
 
 Since version 4.108.0, the Economist app shows its own text-selection menu. Its Translate and Define buttons send `ACTION_TRANSLATE` and `ACTION_DEFINE`. Nothing on a Boox handles those, so tapping them crashed the app. This app handles both.
 
-Tested on a Boox Page (Android 11), Go 7 (Android 13), Go 10.3 (Android 12) and Nova3 (Android 10). On the Nova3, whose dictionary app is older, Define opens that dictionary's own popup.
+Tested on a Boox Nova3 (Android 10), Page (Android 11), Go 10.3 (Android 12) and Go 7 (Android 13). On the Nova3, whose dictionary app is older, Define opens that dictionary's own popup.
 
 ## Install
 
