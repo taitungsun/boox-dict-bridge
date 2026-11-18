@@ -4,11 +4,11 @@ A small Android app for The Economist app on Boox e-readers. Define opens the Bo
 
 Since version 4.108.0, the Economist app shows its own text-selection menu. Its Translate and Define buttons send `ACTION_TRANSLATE` and `ACTION_DEFINE`. Nothing on a Boox handles those, so tapping them crashed the app. This app handles both.
 
-Translate is tested on a Boox Page (Android 11). v1.3 (Define and the dictionary) is also tested on a Boox Go 7 (Android 13) and a Boox Go 10.3 (Android 12).
+Tested on a Boox Page (Android 11), Go 7 (Android 13), Go 10.3 (Android 12) and Nova3 (Android 10). On the Nova3, whose dictionary app is older, Define opens that dictionary's own popup.
 
 ## Install
 
-Download `dict-bridge-v1.4.2.apk` from Releases and install it.
+Download `dict-bridge-v1.4.3.apk` from Releases and install it.
 
 Boox freezes new apps, and a frozen app does nothing. It also freezes them again at every reboot. To stop that, open the Apps tab, tap the snowflake icon at the top, and switch off freezing for "Dictionary". Note that this list uses the name "Dictionary", not the "Dict Bridge" name shown under the app's icon.
 
@@ -29,6 +29,8 @@ The first time Translate runs, the app downloads a book-style Chinese font (Noto
 ## Use
 
 Long-press a word in an Economist article and tap Translate. The screen shows the paragraph on top and its translation below. Tap the back button at the top left to return to the article. A− and A+ change the text size. A paragraph that was translated before shows up at once.
+
+If the paragraph service has just been switched back on, the first Translate shows a short loading message and the screen flashes once before the paragraph appears.
 
 Define under the ⋮ menu shows the small dictionary popup.
 
