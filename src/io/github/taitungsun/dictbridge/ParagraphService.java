@@ -44,9 +44,9 @@ public class ParagraphService extends AccessibilityService {
      * Snapshot the Economist window under our invisible TranslateEntry window. Text in any
      * other app is never read.
      */
-    static void refresh() {
+    static boolean refresh() {
         ParagraphService s = instance;
-        if (s == null) return;
+        if (s == null) return false;
         try {
             for (AccessibilityWindowInfo w : s.getWindows()) {
                 if (w.getType() != AccessibilityWindowInfo.TYPE_APPLICATION) continue;
@@ -58,9 +58,10 @@ public class ParagraphService extends AccessibilityService {
                 visible = out;
                 stamp = System.currentTimeMillis();
                 android.util.Log.i("DictBridge", "read " + out.size() + " blocks from " + r.getPackageName());
-                return;
+                return !out.isEmpty();
             }
         } catch (RuntimeException ignored) { }
+        return false;
     }
 
     private static void collect(AccessibilityNodeInfo n, List<Block> out) {

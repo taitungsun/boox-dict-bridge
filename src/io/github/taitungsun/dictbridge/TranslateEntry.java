@@ -5,8 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.WindowManager;
@@ -17,7 +15,7 @@ import android.view.WindowManager;
  * rewrites the accessibility list), turns it back on, waits for it, then opens TranslateActivity.
  */
 public class TranslateEntry extends Activity {
-    private static final long WAIT_MS = 2500, STEP_MS = 100;
+    private static final long WAIT_MS = 8000, STEP_MS = 150;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,21 +23,44 @@ public class TranslateEntry extends Activity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
                 | WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
         if (ParagraphService.connected()) {
-            forward();
+            if (!getIntent().getBooleanExtra(AGAIN, false)) {
+                // Running already: read now; if Economist isn't behind us, nothing to wait for
+                ParagraphService.refresh();
+                forward();
+                return;
+            }
+            // Second pass after a fresh start: the window list may need a moment
+            long until = System.currentTimeMillis() + 3000;
+            new Thread(() -> {
+                while (!ParagraphService.refresh() && System.currentTimeMillis() < until) nap();
+                runOnUiThread(this::forward);
+            }).start();
             return;
         }
         boolean turnedOn = ensure(this);
         Log.i("DictBridge", "service not connected; re-enabled=" + turnedOn);
         // Enabled but not bound yet (e.g. right after an update): wait for it as well
         if (!turnedOn && !enabled(this)) { forward(); return; }
-        Handler h = new Handler(Looper.getMainLooper());
+        Log.i("DictBridge", "waiting for the article to be readable");
+        // A just-bound service can't read the article yet: Android hands over a window's
+        // contents only after that window has had focus since the bind. So wait for the bind,
+        // then let TranslateActivity step aside (REREAD) so Economist gets focus; it comes back
+        // through here with AGAIN, which reads the article as usual.
         long until = System.currentTimeMillis() + WAIT_MS;
-        h.post(new Runnable() {
-            @Override public void run() {
-                if (ParagraphService.connected() || System.currentTimeMillis() > until) forward();
-                else h.postDelayed(this, STEP_MS);
-            }
-        });
+        new Thread(() -> {
+            while (!ParagraphService.connected() && System.currentTimeMillis() < until) nap();
+            runOnUiThread(() -> {
+                if (ParagraphService.connected()) getIntent().putExtra(REREAD, true);
+                forward();
+            });
+        }).start();
+    }
+
+    static final String REREAD = "io.github.taitungsun.dictbridge.REREAD";
+    static final String AGAIN = "io.github.taitungsun.dictbridge.AGAIN";
+
+    private static void nap() {
+        try { Thread.sleep(STEP_MS); } catch (InterruptedException ignored) { }
     }
 
     private boolean done;
@@ -47,7 +68,6 @@ public class TranslateEntry extends Activity {
     private void forward() {
         if (done) return;
         done = true;
-        ParagraphService.refresh();
         Intent out = new Intent(getIntent()).setClass(this, TranslateActivity.class);
         out.setFlags(0);
         startActivity(out);

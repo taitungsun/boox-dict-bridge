@@ -126,6 +126,22 @@ public class TranslateActivity extends Activity {
         String sel = text == null ? "" : text.toString();
         // Widen the selected words to the whole paragraph(s) when the accessibility service is on
         ParagraphService.Range r = ParagraphService.widen(sel);
+        if (r == null && in.getBooleanExtra(TranslateEntry.REREAD, false)) {
+            // The reader was just switched on: Android hands it the article only after Economist
+            // has had focus once. Step aside, give Economist focus for a moment, then retry.
+            en.addView(enPara("讀取段落中…"));
+            Intent again = new Intent(in).setClass(getApplicationContext(), TranslateEntry.class)
+                    .putExtra(TranslateEntry.AGAIN, true).putExtra(TranslateEntry.REREAD, false);
+            again.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            android.content.Context app = getApplicationContext();
+            en.postDelayed(() -> {
+                finish();
+                overridePendingTransition(0, 0);
+                new android.os.Handler(android.os.Looper.getMainLooper())
+                        .postDelayed(() -> app.startActivity(again), 500);
+            }, 200);
+            return;
+        }
         List<String> first = new ArrayList<>();
         if (r != null) for (String w : r.selected()) first.addAll(split(w));
         if (first.isEmpty()) first = split(sel);
