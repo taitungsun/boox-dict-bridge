@@ -34,9 +34,13 @@ public class BridgeActivity extends Activity {
         try {
             startActivity(out);
         } catch (RuntimeException e) {
-            // Onyx dict missing: fall back to any PROCESS_TEXT handler
-            out.setComponent(null);
-            try { startActivity(out); } catch (RuntimeException ignored) { }
+            // Older Onyx dict (e.g. Nova3, Android 10) has only its plain PROCESS_TEXT popup;
+            // without the dict at all, fall back to any PROCESS_TEXT handler
+            out.setComponent(null).setPackage(DICT);
+            try { startActivity(out); } catch (RuntimeException e2) {
+                out.setPackage(null);
+                try { startActivity(out); } catch (RuntimeException ignored) { }
+            }
         }
     }
 }
